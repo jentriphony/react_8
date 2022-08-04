@@ -1,0 +1,80 @@
+import classes from './List.module.css'
+
+import { Component } from 'react'
+import Item from './Item/Item'
+
+
+
+class List extends Component {
+
+
+
+  constructor() {
+
+    super()
+
+    this.state = { status: true }
+    
+  }
+
+
+
+  componentDidUpdate() {
+
+    if(this.props.list.length === 0) {
+      throw new Error ('no items')
+    }
+    
+  }
+
+  
+
+  statusHandler() {
+
+    this.setState(previousState => {
+      return { status: !previousState.status }
+    })
+
+  }
+
+  
+
+  render() {
+
+    const list_ = (
+      
+      <ul>
+	{ this.props.list.map(item => (
+	  <Item key={ item.id } title={ item.title } />
+	)) }
+      </ul>
+      
+    )
+
+    return (
+
+      <div className={ classes.list }>
+
+
+
+	<button onClick={ this.statusHandler.bind(this) }>
+	  { this.state.status ? 'hide' : 'show' } list
+	</button>
+
+	{ this.state.status && list_ }
+
+
+	
+      </div>
+      
+    )
+    
+  }
+
+
+  
+}
+
+
+
+export default List

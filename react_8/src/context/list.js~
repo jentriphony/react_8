@@ -1,0 +1,9 @@
+import { createContext } from 'react'
+
+
+
+const List = React.createContext({ list: [] })
+
+
+
+export default List
